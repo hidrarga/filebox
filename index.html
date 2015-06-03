@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- Force latest IE rendering engine or ChromeFrame if installed -->
+        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+        <meta charset="utf-8">
+        <title>FileBox</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="resource" type="application/l10n" href="bower_components/chatbox/locales/locales.ini" />
+        
+        <!-- Bootstrap styles -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/filebox.css">
+        <link href="bower_components/chatbox/css/chat.css" rel="stylesheet">
+
+        <script src="bower_components/jquery/dist/jquery.min.js" defer></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js" defer></script>
+
+        <script src="js/jquery.fine-uploader.min.js" defer></script>
+        
+        <script src="js/filebox.js" defer></script>
+        
+        <script src="bower_components/web-socket-js/swfobject.js" defer></script>
+        <script src="bower_components/web-socket-js/web_socket.js" defer></script>
+        
+        <script src="bower_components/webL10n/l10n.js" defer></script>
+        
+        <script src="bower_components/chatbox/js/chat.js" defer></script>
+        
+        <script type="text/template" id="qq-template">
+            <div class="qq-uploader-selector qq-uploader qq-upload-drop-area-selector" qq-drop-area-text="Drop files here">
+                <div class=" qq-upload-drop-area">
+                    <span class="qq-upload-drop-area-text-selector"></span>
+                    <div class="row well form-inline">
+                        <div class="col-xs-7 col-sm-4 col-md-3 col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-success btn-file qq-upload-button-selector">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </span>
+                                </span>
+                                <span class="group-btn">
+                                    <button type="submit" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-share"></span> Envoyer
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-5 col-md-3 col-lg-3">
+                            <span class="control-label qq-drop-processing-selector">Processing dropped files...</span>
+                        </div>
+                        <div class="pull-right">
+                            <select class="form-control">
+                                <option value="" selected>Default</option>
+                                <option value="audios">Audios</option>
+                                <option value="books">Books</option>
+                                <option value="docs">Documents</option>
+                                <option value="images">Images</option>
+                                <option value="others">Others</option>
+                                <option value="videos">Videos</option>
+                            </select>
+                        </div>
+                        <div class="pull-right" style="padding-right:15px">
+                            <button id="button-reset" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-trash"></span> Vider
+                            </button>
+                        </div>
+                    </div>
+                    <ul class="qq-upload-list-selector" aria-live="polite" aria-relevant="additions removals">
+                        <li class="row thumbnail">
+                            <div class="infos">
+                                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+                                    <span class="qq-upload-file-selector qq-upload-file"></span>
+                                    <input class="qq-edit-filename-selector qq-edit-filename form-control" tabindex="0" type="text">
+                                </div>
+                                <div class="pull-left text-float">
+                                    <span class="upload-size"></span>
+                                </div>
+                                <div class="pull-left text-float">
+                                    <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
+                                    <div class="progress progress-striped qq-progress-bar-container-selector">
+                                        <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-success qq-progress-bar-selector qq-progress-bar"></div>
+                                    </div>
+                                </div>
+                                <div class="btn-cancel-retry">
+                                    <button class="qq-upload-retry-selector btn btn-primary btn-xs" title="Retry">
+                                        <span class="glyphicon glyphicon-repeat"></span>
+                                    </button>
+                                    <button class="qq-upload-cancel-selector btn btn-danger btn-xs" title="Cancel">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </script>
+    </head>
+<body>
+<div class="container">
+    <div class="container-fluid">
+        <p>&nbsp;</p>
+        
+        <h3 id="file" data-l10n-id="filebox-title">Upload</h3>
+        
+        <form id="upload" action="server/index.php" method="post" enctype="multipart/form-data"></form>
+        
+        <p>&nbsp</p>
+                
+                <h3 id="chat" data-l10n-id="chatbox-title">Chat</h3>
+                
+                <div class="alert alert-info alert-dismissible" role="info">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                    <span data-l10n-id="chatbox-infobar">Ce chat est anonyme. Seuls les dix derniers messages sont conservés.</span>
+                </div>
+
+                <form  name="chatbox" id="cb_form" class="well form-inline">
+                    <div class="input-group">
+                        <label for="cb_name" class="input-group-addon"><span class="glyphicon glyphicon-user"></span></label>
+                        <input class="form-control" type="text" name="name" id="cb_name" data-l10n-id="input-name" placeholder="Pseudo" value="Anonyme" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="cb_message" class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></label>
+                        <input class="form-control" type="text" name="message" id="cb_message" data-l10n-id="input-message" placeholder="Votre texte" autocomplete="off" required />
+                    </div>
+                    <button id="send-btn" type="submit" class="btn btn-info">
+                        <span class="glyphicon glyphicon-share-alt"></span> <span data-l10n-id="button-chat">Chat</span>
+                    </button>
+                    <button id="reset-btn" class="btn pull-right btn-warning">
+                        <span class="glyphicon glyphicon-trash"></span> <span data-l10n-id="button-reset">Vider</span>
+                    </button>
+                </form>
+                
+                <div class="thumbnail" id="fb_messages"></div>
+                
+                <p>&nbsp</p>
+    </div>
+</div>
+</body> 
+</html>

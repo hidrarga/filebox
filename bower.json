@@ -1,0 +1,25 @@
+{
+  "name": "FileBox",
+  "version": "1.0.0",
+  "authors": [
+    "HgO <hgo@batato.be>"
+  ],
+  "description": "A small file upload service",
+  "keywords": [
+    "upload"
+  ],
+  "license": "GPLv3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "chatbox": "hidrarga/chatbox",
+    "webL10n": "*",
+    "jquery": "~2.1.4"
+  }
+}
