@@ -1,6 +1,6 @@
 {
   "name": "filebox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     "HgO <hgo@batato.be>"
   ],
@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.4",
-    "chatbox": "hidrarga/chatbox",
+    "chatbox": "hidrarga/chatbox#master",
     "webL10n": "*",
     "jquery": "~2.1.4"
   }

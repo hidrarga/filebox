@@ -1,0 +1,15 @@
+{
+    "name": "hidrarga/filebox",
+    "description": "A small file upload service.",
+    "require": {
+        "hidrarga/chatbox": "^1.3"
+    },
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "HgO",
+            "email": "hgo@batato.be"
+        }
+    ],
+    "minimum-stability": "stable"
+}
