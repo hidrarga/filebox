@@ -1,3 +1,7 @@
+body {
+    min-width: 354px;
+}
+
 .qq-drop-processing,
 .qq-edit-filename-icon,
 .qq-upload-file,
@@ -136,4 +140,8 @@ select.form-control {
   -moz-appearance:none;
   -webkit-appearance:none;
   appearance: none;
+}
+
+#button-reset {
+    position: relative;
 }
