@@ -70,6 +70,8 @@ $(window).load(function() {
             item.addClass('alert-danger')
           
           size = formatFileSize(this.getSize(id))
+          
+          item.attr('title', _(response.error))
         }
         
         item.find('.upload-size').text(size)
