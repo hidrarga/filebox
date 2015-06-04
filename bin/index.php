@@ -1,5 +1,5 @@
 <?php
-    error_reporting(E_ALL | E_STRICT);
+    error_reporting(E_ERROR);
     
     class FileBoxException extends Exception {
         protected $retriable;
@@ -18,8 +18,8 @@
     $file = new \stdclass();
     $file->success = false;
     
-    $directory = 'uploads/';
-    $subdirs = array('audios', 'books', 'docs', 'images', 'videos');
+    $directory = '../uploads/';
+    $subdirs = array('', 'audios', 'books', 'docs', 'images', 'videos');
     
     $rejected = array('cgi', 'fcgi', 'htm', 'html', 'js', 'php', 'pl', 'py');
     
@@ -84,7 +84,6 @@
             $subdir = $subdirs[4];
         else
             $subdir = '';
-        
         if(!empty($subdir))
           $directory .= $subdir.'/';
         

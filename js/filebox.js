@@ -2,7 +2,10 @@ $(window).load(function() {
   $('#upload').fineUploader({
     request: {
       inputName: 'file',
-      filenameParam: 'filename'
+      filenameParam: 'filename',
+      params: {
+        directory: ''
+      }
     },
     form: {
       element: $('#upload'),
@@ -21,7 +24,7 @@ $(window).load(function() {
     scaling: {
       hideScaled: true
     },
-    debug: true,
+    debug: false,
     autoUpload: false,
     multiple: true,
     maxConnections: 1,
