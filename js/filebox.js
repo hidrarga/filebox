@@ -1,7 +1,7 @@
 $(window).load(function() {
   $('#upload').fineUploader({
     request: {
-      inputName: 'fil',
+      inputName: 'file',
       filenameParam: 'filename'
     },
     form: {
