@@ -37,21 +37,21 @@
             case UPLOAD_ERR_OK:
                 break;
             case UPLOAD_ERR_INI_SIZE:
-                throw new FileBoxException('The uploaded file exceeds the upload_max_filesize directive in php.ini.', false);
+                throw new FileBoxException('error-php-size', false);
             case UPLOAD_ERR_FORM_SIZE:
-                throw new FileBoxException('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.', false);
+                throw new FileBoxException('error-form-size', false);
             case UPLOAD_ERR_PARTIAL:
-                throw new FileBoxException('The uploaded file was only partially uploaded.');
+                throw new FileBoxException('error-partial-file');
             case UPLOAD_ERR_NO_FILE:
-                throw new FileBoxException('No file was uploaded.');
+                throw new FileBoxException('error-no-file');
             case UPLOAD_ERR_NO_TMP_DIR:
-                throw new FileBoxException('Missing a temporary folder.');
+                throw new FileBoxException('error-tmp-directory', false);
             case UPLOAD_ERR_CANT_WRITE:
-                throw new FileBoxException('Failed to write file to disk.');
+                throw new FileBoxException('error-cant-write', false);
             case UPLOAD_ERR_EXTENSION:
-                throw new FileBoxException('A PHP extension stopped the file upload.');
+                throw new FileBoxException('error-php-extension');
             default:
-                throw new FileBoxException('error-unexpected');
+                throw new FileBoxException('error-unknown');
         }
         
         if(isset($_REQUEST['filename']) and !empty($_REQUEST['filename']))
@@ -68,7 +68,7 @@
         $infos['extension'] = strtolower($infos['extension']);
         
         if(in_array($infos['extension'], $rejected))
-            throw new FileBoxException('file-format-invalid', false);
+            throw new FileBoxException('error-file-format', false);
         
         if(isset($_REQUEST['directory']) and in_array($_REQUEST['directory'], $subdirs))
             $subdir = $_REQUEST['directory'];
@@ -104,13 +104,13 @@
             $file->success = true;
             $file->url = dirname($_SERVER['PHP_SELF']).'/'.$path;
         } else
-            throw new FileBoxException('Failed to move uploaded file.');
+            throw new FileBoxException('error-move-uploaded-file');
                 
         $file->size = filesize($path);
         if($file->size != $_FILES['file']['size']) {
             if(file_exists($path))
                 unlink($path);
-            throw new FileBoxException('File aborted.');
+            throw new FileBoxException('error-file-aborted.');
         }
     } catch(FileBoxException $e) {
         $file->error = $e->getMessage();

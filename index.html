@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link rel="resource" type="application/l10n" href="bower_components/chatbox/locales/locales.ini" />
+        <link rel="resource" type="application/l10n" href="locales/locales.ini" />
         
         <!-- Bootstrap styles -->
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -29,10 +30,10 @@
         <script src="bower_components/chatbox/js/chat.js" defer></script>
         
         <script type="text/template" id="qq-template">
-            <div class="qq-uploader-selector qq-uploader qq-upload-drop-area-selector" qq-drop-area-text="Drop files here">
+            <div class="qq-uploader-selector qq-uploader qq-upload-drop-area-selector">
                 <div class=" qq-upload-drop-area">
-                    <span class="qq-upload-drop-area-text-selector"></span>
-                    <div class="row well form-inline">
+                    <div class="row well form-inline drop-container-text">
+                        <div class="drop-text" data-l10n-id="filebox-drop">Déposez vos fichiers</div>
                         <div class="col-xs-7 col-sm-4 col-md-3 col-lg-2">
                             <div class="input-group">
                                 <span class="input-group-btn">
@@ -42,13 +43,13 @@
                                 </span>
                                 <span class="group-btn">
                                     <button type="submit" class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-share"></span> Envoyer
+                                        <span class="glyphicon glyphicon-share"></span> <span data-l10n-id="button-upload">Envoyer</span>
                                     </button>
                                 </span>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-5 col-md-3 col-lg-3">
-                            <span class="control-label qq-drop-processing-selector">Processing dropped files...</span>
+                            <span class="control-label qq-drop-processing-selector" data-l10n-id="filebox-drop-processing">Traitement des fichiers déposés&hellip;</span>
                         </div>
                         <!--div class="pull-right">
                             <select class="form-control">
@@ -63,7 +64,7 @@
                         </div-->
                         <div class="pull-right" style="padding-right:15px">
                             <button id="button-reset" class="btn btn-warning">
-                                <span class="glyphicon glyphicon-trash"></span> Vider
+                                <span class="glyphicon glyphicon-trash"></span> <span data-l10n-id="button-reset">Vider</span>
                             </button>
                         </div>
                     </div>
@@ -78,7 +79,7 @@
                                     <span class="upload-size"></span>
                                 </div>
                                 <div class="pull-left text-float">
-                                    <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+                                    <span role="status" class="qq-upload-status-text"></span>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
                                     <div class="progress progress-striped qq-progress-bar-container-selector">
@@ -86,10 +87,10 @@
                                     </div>
                                 </div>
                                 <div class="btn-cancel-retry">
-                                    <button class="qq-upload-retry-selector btn btn-primary btn-xs" title="Retry">
+                                    <button class="qq-upload-retry-selector btn btn-primary btn-xs" data-l10n-id="button-retry">
                                         <span class="glyphicon glyphicon-repeat"></span>
                                     </button>
-                                    <button class="qq-upload-cancel-selector btn btn-danger btn-xs" title="Cancel">
+                                    <button class="qq-upload-cancel-selector btn btn-danger btn-xs" data-l10n-id="button-cancel">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>
@@ -105,40 +106,40 @@
     <div class="container-fluid">
         <p>&nbsp;</p>
         
-        <h3 id="file" data-l10n-id="filebox-title">Upload</h3>
+        <h3 id="file" data-l10n-id="filebox-title">Envoyer un fichier</h3>
         
         <form id="upload" action="server/index.php" method="post" enctype="multipart/form-data"></form>
         
         <p>&nbsp</p>
                 
-                <h3 id="chat" data-l10n-id="chatbox-title">Chat</h3>
-                
-                <div class="alert alert-info alert-dismissible" role="info">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <span class="glyphicon glyphicon-thumbs-up"></span>
-                    <span data-l10n-id="chatbox-infobar">Ce chat est anonyme. Seuls les dix derniers messages sont conservés.</span>
-                </div>
+        <h3 id="chat" data-l10n-id="chatbox-title">Chat</h3>
+        
+        <div class="alert alert-info alert-dismissible" role="info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <span class="glyphicon glyphicon-thumbs-up"></span>
+            <span data-l10n-id="chatbox-infobar">Ce chat est anonyme. Seuls les dix derniers messages sont conservés.</span>
+        </div>
 
-                <form  name="chatbox" id="cb_form" class="well form-inline">
-                    <div class="input-group">
-                        <label for="cb_name" class="input-group-addon"><span class="glyphicon glyphicon-user"></span></label>
-                        <input class="form-control" type="text" name="name" id="cb_name" data-l10n-id="input-name" placeholder="Pseudo" value="Anonyme" required />
-                    </div>
-                    <div class="input-group">
-                        <label for="cb_message" class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></label>
-                        <input class="form-control" type="text" name="message" id="cb_message" data-l10n-id="input-message" placeholder="Votre texte" autocomplete="off" required />
-                    </div>
-                    <button id="send-btn" type="submit" class="btn btn-info">
-                        <span class="glyphicon glyphicon-share-alt"></span> <span data-l10n-id="button-chat">Chat</span>
-                    </button>
-                    <button id="reset-btn" class="btn pull-right btn-warning">
-                        <span class="glyphicon glyphicon-trash"></span> <span data-l10n-id="button-reset">Vider</span>
-                    </button>
-                </form>
-                
-                <div class="thumbnail" id="cb_messages"></div>
-                
-                <p>&nbsp</p>
+        <form  name="chatbox" id="cb_form" class="well form-inline">
+            <div class="input-group">
+                <label for="cb_name" class="input-group-addon"><span class="glyphicon glyphicon-user"></span></label>
+                <input class="form-control" type="text" name="name" id="cb_name" data-l10n-id="input-name" placeholder="Pseudo" value="Anonyme" required />
+            </div>
+            <div class="input-group">
+                <label for="cb_message" class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></label>
+                <input class="form-control" type="text" name="message" id="cb_message" data-l10n-id="input-message" placeholder="Votre texte" autocomplete="off" required />
+            </div>
+            <button id="send-btn" type="submit" class="btn btn-info">
+                <span class="glyphicon glyphicon-share-alt"></span> <span data-l10n-id="button-chat">Chat</span>
+            </button>
+            <button id="reset-btn" class="btn pull-right btn-warning">
+                <span class="glyphicon glyphicon-trash"></span> <span data-l10n-id="button-reset">Vider</span>
+            </button>
+        </form>
+        
+        <div class="thumbnail" id="cb_messages"></div>
+        
+        <p>&nbsp</p>
     </div>
 </div>
 </body> 

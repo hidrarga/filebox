@@ -1,7 +1,7 @@
 $(window).load(function() {
   $('#upload').fineUploader({
     request: {
-      inputName: 'file',
+      inputName: 'fil',
       filenameParam: 'filename'
     },
     form: {
@@ -9,7 +9,8 @@ $(window).load(function() {
       autoUpload: false
     },
     text: {
-      formatProgress: '{percent}%'
+      formatProgress: '{percent}%',
+      defaultResponseError: 'error-unknown'
     },
     display: {
       prependFiles: true
@@ -31,6 +32,8 @@ $(window).load(function() {
         
         item.find('.upload-size').text(size)
         item.find('.qq-edit-filename-selector').keypress(function(e) { if(e.which == 13) return false })
+        item.find('.qq-upload-cancel-selector').attr('title', _('button-cancel'))
+        item.find('.qq-upload-retry-selector').attr('title', _('button-retry'))
       },
       onComplete: function(id, name, response, xhr) {
         var item = $(this.getItemByFileId(id))
@@ -82,6 +85,10 @@ $(window).load(function() {
           item.addClass('alert-warning')
           
         item.find('.qq-progress-bar-selector').text(percent + '%')
+      },
+      onError: function(id, name, reason, xhr) {
+        var item = $(this.getItemByFileId(id))
+        item.find('.qq-upload-status-text').text(_(reason))
       }
     }
   })
@@ -108,7 +115,7 @@ function formatFileSize(bytes) {
     return ''
 
   if(bytes < 1024)
-    return bytes
+    return bytes + ' o'
     
   if(bytes < 1048576)
     return (bytes / 1024).toFixed(precision) + ' Kio'
