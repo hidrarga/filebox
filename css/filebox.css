@@ -2,7 +2,8 @@
 .qq-edit-filename-icon,
 .qq-upload-file,
 .qq-upload-status-text,
-.upload-size {
+.upload-size,
+.control-label {
     line-height: 34px;
 }
 
@@ -90,7 +91,7 @@ INPUT.qq-edit-filename.qq-editing {
 }
 
 .qq-uploader {
-    padding: 20px;
+    padding: 10px 20px;
     border-radius: 6px;
     border: 1px dashed #FFFFFF;
 }

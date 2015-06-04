@@ -48,9 +48,6 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-5 col-md-3 col-lg-3">
-                            <span class="control-label qq-drop-processing-selector" data-l10n-id="filebox-drop-processing">Traitement des fichiers déposés&hellip;</span>
-                        </div>
                         <!--div class="pull-right">
                             <select class="form-control">
                                 <option value="" selected>Default</option>
@@ -66,6 +63,9 @@
                             <button id="button-reset" class="btn btn-warning">
                                 <span class="glyphicon glyphicon-trash"></span> <span data-l10n-id="button-reset">Vider</span>
                             </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-7">
+                            <span class="control-label qq-drop-processing-selector" data-l10n-id="filebox-drop-processing">Traitement des fichiers déposés&hellip;</span>
                         </div>
                     </div>
                     <ul class="qq-upload-list-selector" aria-live="polite" aria-relevant="additions removals">
@@ -106,7 +106,13 @@
     <div class="container-fluid">
         <p>&nbsp;</p>
         
-        <h3 id="file" data-l10n-id="filebox-title">Envoyer un fichier</h3>
+        <h3 id="filebox" data-l10n-id="filebox-title">Envoyer un fichier</h3>
+        
+        <div class="alert alert-warning alert-dismissible" role="info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            <strong data-l10n-id="warning">Attention</strong>: <span data-l10n-id="filebox-warning-upload">Ne quittez pas la page pendant l'envoi !</span>
+        </div>
         
         <form id="upload" action="server/index.php" method="post" enctype="multipart/form-data"></form>
         
