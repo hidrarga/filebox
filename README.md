@@ -26,6 +26,7 @@ If you don't have composer installed, run:
 
 ```bash
 curl -sS https://getcomposer.org/installer | php
+```
 
 ## Features
 
