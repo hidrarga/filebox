@@ -24,7 +24,7 @@ $(window).load(function() {
     scaling: {
       hideScaled: true
     },
-    debug: false,
+    debug: true,
     autoUpload: false,
     multiple: true,
     maxConnections: 1,
@@ -33,7 +33,9 @@ $(window).load(function() {
         var size = formatFileSize(this.getSize(id))
         var item = $(this.getItemByFileId(id))
         
-        item.find('.upload-size').text(size)
+        if(size)
+          item.find('.upload-size').text(size)
+        
         item.find('.qq-edit-filename-selector').keypress(function(e) { if(e.which == 13) return false })
         item.find('.qq-upload-cancel-selector').attr('title', _('button-cancel'))
         item.find('.qq-upload-retry-selector').attr('title', _('button-retry'))
@@ -47,6 +49,7 @@ $(window).load(function() {
           item.removeClass('alert-warning')
           itemName.removeClass('qq-editable')
         }
+        
         
         if(response.success) {
           if(item.hasClass('alert-danger'))
@@ -67,17 +70,22 @@ $(window).load(function() {
             }))
             
           item.find('.qq-upload-cancel-selector').removeClass('qq-hide')
+          item.attr('title', '')
         }
         else {
+          var reason = response.error
+          
           if(!item.hasClass('alert-danger'))
             item.addClass('alert-danger')
           
           size = formatFileSize(this.getSize(id))
           
-          item.attr('title', _(response.error))
+          item.attr('title', _(reason))
+          item.find('.qq-upload-status-text-selector').text(_(reason))
         }
         
-        item.find('.upload-size').text(size)
+        if(size)
+          item.find('.upload-size').text(size)
       },
       onProgress: function(id, name, uploadedBytes, totalBytes) {
         var item = $(this.getItemByFileId(id))
@@ -93,7 +101,7 @@ $(window).load(function() {
       },
       onError: function(id, name, reason, xhr) {
         var item = $(this.getItemByFileId(id))
-        item.find('.qq-upload-status-text').text(_(reason))
+        item.find('.qq-upload-status-text-selector').text(_(reason))
       }
     }
   })
@@ -116,9 +124,9 @@ $(window).load(function() {
 function formatFileSize(bytes) {
   var precision = 0
   
-  if (typeof bytes !== 'number')
+  if (typeof bytes !== 'number' || bytes < 0)
     return ''
-
+    
   if(bytes < 1024)
     return bytes + ' o'
     

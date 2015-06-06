@@ -10,13 +10,13 @@ All you need to do is running bower:
 
 ```bash
 bower update
-``
 ```
 
 If you don't have bower installed, run:
 
 ```bash
 npm install -g bower
+```
 
 ## Features
 
