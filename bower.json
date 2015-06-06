@@ -14,8 +14,7 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests",
-    "/bin"
+    "tests"
   ],
   "dependencies": {
     "bootstrap": "~3.3.4",

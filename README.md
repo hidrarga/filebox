@@ -6,27 +6,17 @@ The server side application is written in PHP.
 
 ## Installation
 
-All you need to do is running bower and composer.
+All you need to do is running bower:
 
 ```bash
 bower update
-```
-
-```bash
-composer update
+``
 ```
 
 If you don't have bower installed, run:
 
 ```bash
 npm install -g bower
-```
-
-If you don't have composer installed, run:
-
-```bash
-curl -sS https://getcomposer.org/installer | php
-```
 
 ## Features
 
@@ -51,4 +41,4 @@ params: {
 
 ### Server
 
-Don't forget to change the upload directory in `server/index.php`
+Don't forget to change the upload directory in `bin/index.php`

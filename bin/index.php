@@ -1,5 +1,5 @@
 <?php
-    error_reporting(E_ERROR);
+    error_reporting(E_ERROR | E_PARSE);
     
     class FileBoxException extends Exception {
         protected $retriable;
@@ -18,7 +18,8 @@
     $file = new \stdclass();
     $file->success = false;
     
-    $directory = '../uploads/';
+    $directory = $_SERVER['DOCUMENT_ROOT'].'/Shared/';
+    
     $subdirs = array('', 'audios', 'books', 'docs', 'images', 'videos');
     
     $rejected = array('cgi', 'fcgi', 'htm', 'html', 'js', 'php', 'pl', 'py');
