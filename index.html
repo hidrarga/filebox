@@ -133,7 +133,7 @@
             </div>
             <div class="input-group">
                 <label for="cb_message" class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></label>
-                <input class="form-control" type="text" name="message" id="cb_message" data-l10n-id="input-message" placeholder="Votre texte" autocomplete="off" required />
+                <input class="form-control" type="text" name="message" id="cb_message" data-l10n-id="input-message" placeholder="Votre texte" autocomplete="off" />
             </div>
             <button id="send-btn" type="submit" class="btn btn-info">
                 <span class="glyphicon glyphicon-share-alt"></span> <span data-l10n-id="button-chat">Chat</span>
@@ -143,7 +143,15 @@
             </button>
         </form>
         
-        <div class="thumbnail" id="cb_messages"></div>
+        <div class="col-xs-12 col-sm-9 col-md-10">
+            <div class="thumbnail" id="cb_messages"></div>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-2">
+            <div class="thumbnail hidden" id="cb_users">
+                <div class="system info" data-l10n-id="users">Utilisateurs</div>
+                <hr />
+            </div>
+        </div>
         
         <p>&nbsp</p>
     </div>
